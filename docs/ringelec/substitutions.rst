@@ -1,2 +1,2 @@
-.. |DistAlgName| replace:: Ring Election 
+.. |RINGELEC| replace:: Ring Election 
 

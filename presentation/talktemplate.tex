@@ -35,7 +35,7 @@
 \def\false{\textbf{F}}
 
 
-\author[John Doe]{John Doe\\\href{mailto:john@example.com}{john@example.com}}
+\author[Selay Tekgül]{Selay Tekgül\\\href{mailto:selay@ceng.metu.edu.tr}{selay@ceng.metu.edu.tr}}
 %\author[J.\,Doe \& J.\,Doe]
 %{%
 %  \texorpdfstring{
@@ -53,8 +53,8 @@
 %  {John Doe \& Jane Doe}
 %}
 
-\title[WINS Beamer Template]{WINS Lab Beamer Presentation Template}
-\subtitle[Short SubTitle]{How to Prepare a Nice Presentation}
+\title[Coordinator Election Algorithms in Ring Topology]{Coordinator Election Algorithms in Ring Topology}
+\subtitle[Short SubTitle]{Chang Roberts and Franklin's Algorithms}
 %\date{} 
 
 \begin{document}
@@ -96,39 +96,55 @@
 %        \sectionpage
 %\end{frame}
 
-\begin{frame}{The problem}
-\framesubtitle{Tell a \alert{STORY} from the background to the conclusion}
-\begin{block}{The Problem Name} 
-Explain the problem here. Instead of using the term `The problem'', please use specific name for the problem. Tell us a story. Provide a picture for the scenario depicting the problem. Set the scene for average audience.
-\end{block}
-Spend at least \textbf{1.5-2 minutes per slide} on average.
+\begin{frame}{Distributed coordinator/leader election}
+\framesubtitle{Imagine a network of data storage servers arranged in a closed loop, like a digital \alert{RING}.
+Each server in this ring holds a piece of crucial information.
 
-The introduction should be something like ``I will be presenting title of talk. This is joint work with your colleagues or advisor at institution.'' 
+However, a critical task arises: the servers need to agree on a single coordinator to manage updates and ensure data consistency across the entire ring.
+Without a designated leader, conflicts could occur. Different servers might update the same information simultaneously, leading to inconsistencies and errors.}
+\begin{block}{The Ring Election Problem} 
+The Ring Election problem asks: how can these servers elect a single coordinator from within the ring itself?
+The chosen coordinator will be responsible for coordinating updates, ensuring all servers possess the same, up-to-date information.
+This seemingly simple task requires a \textbf{sophisticated algorithm} to function efficiently within the closed-loop structure of the ring network.\end{block}
 \note{}
 \end{frame}
 
-\section{The Contribution}
+\section{The Contribution - Chang Roberts}
 \begin{frame}
-\frametitle{What is the solution/contribution}
+\frametitle{Chang-Roberts Algorithm: Efficient Leader Election in Directed Rings}
 \framesubtitle{}
-Explain \textbf{YOUR} contributions. Go top-down. Give the brief introduction to the contributions at the beginning of the presentation. A slide should have no more than five to six lines of text or bullets. Prefer figures instead of text: A picture is worth a thousand words.
+The Chang-Roberts algorithm offers a \textbf{ROBUST} approach to leader election in directed ring networks, characterized by the following key strengths:
 \begin{itemize}
-\item Communicate the Key Ideas
-\item Don’t get Bogged Down in Details
-\item Use a Top-down Approach
+\item Directed Rings: Works best in directed ring networks for optimized communication.
+\item ID-based Election: Uses process IDs (highest wins) for efficient leader selection.
+\item Guaranteed Termination: Ensures the election concludes with a single leader.
+\item Scalable Messages: Message complexity scales proportionally with the network size.
 \end{itemize}
+\end{frame}
 
-The audience will remember at most one single message \textbf{Which message you want to audience to remember? Can you express this message in less than a minute in an elevator?}
 
+\section{The Contribution - Franklin's}
+\begin{frame}
+\frametitle{Franklin's Algorithm: Leader Election in Bidirectional Rings}
+\framesubtitle{}
+Franklin's algorithm tackles leader election in \textbf{BIDIRECTIONAL} ring networks, offering these key advantages:
+\begin{itemize}
+\item Bidirectional Communication: Leverages communication in both directions within the ring, potentially accelerating leader selection compared to unidirectional algorithms.
+\item Probabilistic Selection: Introduces an element of randomness to potentially break ties and avoid deadlocks in scenarios with identical process IDs.
+\item Scalable Messages: Message complexity scales proportionally with the network size, similar to Chang-Roberts.
+\item Guaranteed Termination: Ensures the election concludes with a single leader, even in the presence of process failures.
+\end{itemize}
 \end{frame}
 
 
 \section{Motivation/Importance}
 \begin{frame}
-\frametitle{Motivation/Importance}
-\framesubtitle{``Gain upon solving the problem, pain if not solved'' should be explained}
-Explain why the problem is so important. Throw in a little philosophy if necessary. How does the problem fit into the larger picture? If it involves a model of a real-world phenomenon, then how good is the model? What are its applications? What makes the problem nontrivial? You can return to these issues in the Conclusion, when you can re-address them with the benefit of hindsight.
-\end{frame}
+\frametitle{Ring Leader Election: Keeping Order Flowing}
+\framesubtitle{``Order from Chaos: Electing a Leader in Ring Networks''}
+Ring networks struggle without a leader. Tasks clash, data conflicts, and messages meander.
+Leader election establishes a coordinator: streamlining tasks, ensuring data consistency, and optimizing communication.
+
+This is crucial for distributed systems like databases and blockchains, ensuring a smooth flow within the ring.\end{frame}
 
 \section{Background/Model/Definitions/Previous Works}
 
@@ -137,15 +153,30 @@ Explain why the problem is so important. Throw in a little philosophy if necessa
 
 \frame{
 \frametitle{Model, Definitions}
-\framesubtitle{Formal definition of a Stochastic Process}
-The use of terminology and jargon should be kept to a minimum, but is impossible to avoid entirely. All terms must be introduced early. It is also useful to remind the audience of the definitions at critical points later in the talk.
+\framesubtitle{Distributed coordinator/leader election}
+Ring Networks - Leader Election
+Imagine a circle of computers (processes) talking to their neighbors. This is a ring network.
+\begin{itemize}
 
-Background and this slide can be combined....
+\item Chang-Roberts works in directed rings (one-way talk) while Franklin's tackles bidirectional rings (two-way talk).
+
+\item Leader election picks a coordinator (leader) for the ring to manage tasks, data, and communication.
+\end{itemize}
+
 }
 
 \subsection{Background, Previous Works}
 \begin{frame}{Background}
-Research is not usually carried out in a vacuum. There will almost always be other relevant or related work, which you should describe. Present an orderly synopsis of these previously- obtained results. A table is often used for this purpose. Be sure to mention the author of each paper and its date of publication. \textbf{Compare and contrast them with each other and with your paper.}
+Leader election in ring networks has been extensively studied. Several algorithms exist, each with trade-offs. Here's a comparison of Chang-Roberts and Franklin's:
+\begin{itemize}
+
+\item Chang-Roberts (1979) is a simple and efficient algorithm for directed rings, but limited to unidirectional communication.
+    
+\item Franklin's (1982) builds on Chang-Roberts, introducing bidirectional communication and probabilistic tie-breaking.
+        
+Both algorithms guarantee termination and message complexity scales with the network size.
+\end{itemize}
+
 \end{frame}
 
 
@@ -214,7 +245,7 @@ Pause, and explain the relationships between the formal theorems that you have j
 \begin{frame}
 \frametitle{Main Point 3}
 \framesubtitle{Sketch a Proof of the Crucial Results}
-The emphasis is on the word ``sketch''. Give a very high-level description of the proofs, emphasizing the proof structure and the proof techniques used. If the proofs have no structure (in which case it may be assumed that you are not the author of the paper), then you must impose one on them. Gloss over the technical details. It is a good idea to point them out but not to explore them.
+The emphasis is on the word ``sketcaaaah''. Give a very high-level description of the proofs, emphasizing the proof structure and the proof techniques used. If the proofs have no structure (in which case it may be assumed that you are not the author of the paper), then you must impose one on them. Gloss over the technical details. It is a good idea to point them out but not to explore them.
 \end{frame}
 
 

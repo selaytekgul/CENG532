@@ -5,7 +5,7 @@
 
 .. include:: docs/ringelec/substitutions.rst
 
-|DistAlgName|
+|RINGELEC|
 =======================================================================================
 
 .. toctree::
