@@ -25,6 +25,7 @@ There are some issues you have to address before starting implementation, please
 - Use restructured text for documentation. There is a conf.py and the associated Makefile in the project's root directory. Running``make`` in the project's root directory will provide you a guide on how to build the html, pdf, epub, etc. documentation. For example, run `make html` and open `index.html`  under `_build/html` with a browser.
 - Do not edit anything in `_build`, `_static`, `_templates` directories.  
 - In `conf.py`  edit `project, copyright, author, release` fields.
+- ringelec
 
 ## Documenting
 
