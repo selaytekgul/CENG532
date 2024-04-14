@@ -1,41 +1,69 @@
+class ChangRobertsMessagePayload(GenericMessagePayload):
+    def __init__(self, uid, direction, messagepayload=None):
+        super().__init__(messagepayload)
+        self.uid = uid
+        self.direction = direction
+
 class ChangRobertsNode(GenericModel):
     def __init__(self, componentname, componentinstancenumber, context=None, configurationparameters=None, num_worker_threads=1, topology=None):
         super().__init__(componentname, componentinstancenumber, context, configurationparameters, num_worker_threads, topology)
-        self.id = componentinstancenumber
-        self.state = "idle"  # Possible states: "idle", "candidate", "elected", "leader"
-        self.leader_id = None  # To store the leader id
-        self.max_message_id = None  # To store the maximum message id received
+        self.uid = int(componentinstancenumber)
+        self.neighbour_id = (self.uid % topology.num_nodes) + 1 if self.uid < topology.num_nodes else 1
+        self.next_hop = topology.get_next_hop(self.uid, self.neighbour_id)
+        self.next_hop_interface_id = f"{self.uid}-{self.next_hop}"
 
     def initiate_election(self):
-        self.state = "candidate"
-        # Send election message with its own id
-        message_payload = ChangRobertsMessagePayload(self.id)
-        message_header = GenericMessageHeader(ChangRobertsMessageTypes.ELECTION, self.id, (self.id + 1) % self.topology.size)
-        message = GenericMessage(message_header, message_payload)
+        header = ChangRobertsMessageHeader(
+            messagefrom=self.componentinstancenumber,
+            messageto=self.next_hop,
+            nexthop=self.next_hop,
+            messagetype="Chang-Roberts Message",
+            interfaceid=self.next_hop_interface_id
+        )
+        payload = ChangRobertsMessagePayload(self.uid, "clockwise")
+        message = GenericMessage(header, payload)
         self.send_down(Event(self, EventTypes.MFRT, message))
 
     def on_message_from_bottom(self, eventobj: Event):
-        message = eventobj.eventcontent
-        if message.header.messagetype == ChangRobertsMessageTypes.ELECTION:
-            payload = message.payload
-            if payload.node_id > self.id:
-                # Forward the election message
-                next_node_id = (self.id + 1) % self.topology.size
-                message.header.messagefrom = self.id
-                message.header.messageto = next_node_id
-                self.send_down(Event(self, EventTypes.MFRT, message))
-            elif payload.node_id < self.id:
-                # Ignore the message, as it's from a lower id node
-                pass
+        payload: ChangRobertsMessagePayload = eventobj.eventcontent.payload
+        header: ChangRobertsMessageHeader = eventobj.eventcontent.header
+
+        if payload.uid == self.uid:
+            # Election completed
+            logger.debug(f"🤖 {self.componentinstancenumber}: I'm the leader!")
+        else:
+            if payload.direction == "clockwise":
+                if payload.uid < self.uid:
+                    # Forward message clockwise
+                    payload.direction = "clockwise"
+                    header.messageto = self.next_hop
+                    header.next_hop = self.next_hop
+                    header.interfaceid = self.next_hop_interface_id
+                    message = GenericMessage(header, payload)
+                    self.send_down(Event(self, EventTypes.MFRT, message))
+                else:
+                    # Send message in reverse direction
+                    payload.direction = "counterclockwise"
+                    header.messageto = self.topology.get_previous_hop(self.componentinstancenumber, self.neighbour_id)
+                    header.next_hop = header.messageto
+                    header.interfaceid = f"{self.componentinstancenumber}-{header.messageto}"
+                    message = GenericMessage(header, payload)
+                    self.send_down(Event(self, EventTypes.MFRT, message))
             else:
-                # This node wins the election
-                self.state = "elected"
-                self.leader_id = self.id
-                # Send leader message to all nodes
-                leader_message_payload = ChangRobertsMessagePayload(self.id)
-                leader_message_header = GenericMessageHeader(ChangRobertsMessageTypes.LEADER, self.id, None)
-                leader_message = GenericMessage(leader_message_header, leader_message_payload)
-                self.send_down(Event(self, EventTypes.MFRT, leader_message))
-        elif message.header.messagetype == ChangRobertsMessageTypes.LEADER:
-            self.state = "leader"
-            self.leader_id = message.header.messagefrom
+                if payload.uid > self.uid:
+                    # Forward message counterclockwise
+                    payload.direction = "counterclockwise"
+                    header.messageto = self.next_hop
+                    header.next_hop = self.next_hop
+                    header.interfaceid = self.next_hop_interface_id
+                    message = GenericMessage(header, payload)
+                    self.send_down(Event(self, EventTypes.MFRT, message))
+                else:
+                    # Send message in reverse direction
+                    payload.direction = "clockwise"
+                    header.messageto = self.topology.get_previous_hop(self.componentinstancenumber, self.neighbour_id)
+                    header.next_hop = header.messageto
+                    header.interfaceid = f"{self.componentinstancenumber}-{header.messageto}"
+                    message = GenericMessage(header, payload)
+                    self.send_down(Event(self, EventTypes.MFRT, message))
+
