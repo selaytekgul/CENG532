@@ -183,70 +183,155 @@ Both algorithms guarantee termination and message complexity scales with the net
 
 
 \section{Contribution}
-\subsection{Main Point 1}
-\begin{frame}{Main Point 1: A Figure}
-\framesubtitle{Abstract the Major Results}
-Describe the key results of the paper. You may present the statements of the major theorems, but not their proofs. You will probably have to get a little technical here, but do so gradually and carefully.
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.5]{figures/Chick1.png}
-    \caption{Awesome Image}
-    \label{fig:awesome_image}
-\end{figure}
+\subsection{Implementation}
+\begin{frame}{Coordinator Election in Rings}
+\framesubtitle{Chang Roberts Algorithm}
+Designed for rings where processes have unique identifiers. Messages with process IDs are circulated, and a process remains active if its own ID is larger than the IDs it receives. The process with the largest ID eventually becomes the leader.
+%\begin{figure}
+%     \centering
+%     \includegraphics[scale=0.5]{figures/Chick1.png}
+%     \caption{Awesome Image}
+%     \label{fig:awesome_image}
+% \end{figure}
 \note{
 }
 \end{frame}
 
 
-\subsection{Main Point 2}
+\subsection{Algorithm}
 
 \begin{frame}
-\frametitle{An Example Distributed Algorithm}
-\framesubtitle{Blind Flooding}
-
-
-Blind flooding on an undirected graph is presented in Algorithm~\ref{alg:blindflooding}.
-
+\frametitle{Coordinator Election Algorithm in a Ring Topology}
+\framesubtitle{Chang Roberts}
+Chang Roberts on a ring topology is presented in Algorithm~\ref{alg:changroberts}.
 \begin{center}
-\begin{algorithm}[H]
-	\scriptsize
-	\def\algorithmlabel{BlindFlooding}
-    \caption{\algorithmlabel\ algorithm}
-    \label{alg:blindflooding}
-    \begin{algorithmic}[1]
-    	\Implement {\algorithmlabel}{cf} 
-    	\Use {LinkLayerBroadcast} {lbc} 
-    	\Events{Init, MessageFromTop, MessageFromBottom}
-	\Need {}
+    \begin{algorithm}[H]
+        \scriptsize
+        \def\algorithmlabel{Chang Roberts}
+        \caption{\algorithmlabel\ algorithm}
+        \label{alg:changroberts}
+        \begin{algorithmic}[1]
+            \State Initialize process ID and state
+            \Event{MessageFromBottom} { $m$ }
+                \\
+                \If { $m.id > self.id$ } {Become passive}
+                \Else {Continue as active}
+                \State Broadcast $m$
+            \Event{MessageFromTop} { $m$ }  
+                \\
+                \If { $m.id > self.id$ } {Become passive}
+                \Else {Continue as active}
+                \State Broadcast $m$
+        \end{algorithmic}
+    \end{algorithm}
+    \end{center}
+    \end{frame}
 
-        \Event {Init}{}
-        		
-        \Event{MessageFromBottom} { $m$ }
-        		\Trig{lbc}{Broadcast} { $m$  }
-        		
-        \Event{MessageFromTop} { $m$ }	
-        		\Trig{lbc}{Broadcast} { $m$  }
-    \end{algorithmic}
-\end{algorithm}
-\end{center}
-
-
+\begin{frame}
+\frametitle{Advantages}
+\framesubtitle{Efficiency Improvement}
+Notably enhances message complexity compared to basic flooding algorithms, contributing to more streamlined communication in ring networks.
 \end{frame}
 
 \begin{frame}
-\frametitle{Main Point 2}
-\framesubtitle{Explain the Significance of the Results}
-Pause, and explain the relationships between the formal theorems that you have just presented and the informal description that you gave in the Introduction. Make it clear to the audience that the results do live up to the advance publicity. If the statements of the theorems are very technical then this may take some time. It is time well-spent.
-
+    \frametitle{Advantages}
+    \framesubtitle{Straightforward Implementation}
+    Relatively straightforward to implement due to its clear-cut logic and reliance on simple message circulation principles.
 \end{frame}
 
-\subsection{Main Point 3}
+
 \begin{frame}
-\frametitle{Main Point 3}
-\framesubtitle{Sketch a Proof of the Crucial Results}
-The emphasis is on the word ``sketcaaaah''. Give a very high-level description of the proofs, emphasizing the proof structure and the proof techniques used. If the proofs have no structure (in which case it may be assumed that you are not the author of the paper), then you must impose one on them. Gloss over the technical details. It is a good idea to point them out but not to explore them.
+    \frametitle{Disadvantages}
+    \framesubtitle{Message Complexity}
+    Despite being an improvement over basic flooding algorithms, it still exhibits a worst-case message complexity of O(\(n^2\)), which can become prohibitive for larger networks.
 \end{frame}
+
+
+\begin{frame}
+    \frametitle{Disadvantages}
+    \framesubtitle{Dependency on Unique Identifiers}
+    The algorithm heavily relies on the existence of unique identifiers for each process, limiting its applicability in scenarios where such identifiers are not readily available.
+\end{frame}
+
+
+
+
+
+
+
+\subsection{Implementation}
+\begin{frame}{Coordinator Election in Rings}
+\framesubtitle{Franklin's Algorithm}
+Designed for bidirectional rings. It uses the concept of “waves” of messages, where a process can start a wave if its ID is larger than its neighbors. Waves travel in both directions, and collisions resolve in favor of the larger ID. Eventually, the largest ID prevails.
+
+%\begin{figure}
+%     \centering
+%     \includegraphics[scale=0.5]{figures/Chick1.png}
+%     \caption{Awesome Image}
+%     \label{fig:awesome_image}
+% \end{figure}
+\note{
+}
+\end{frame}
+
+
+\subsection{Algorithm}
+
+\begin{frame}
+\frametitle{Coordinator Election Algorithm in a Ring Topology}
+\framesubtitle{Franklin's}
+Franklin's on a ring topology is presented in Algorithm~\ref{alg:franklins}.
+\begin{center}
+    \begin{algorithm}[H]
+        \scriptsize
+        \def\algorithmlabel{Franklin's}
+        \caption{\algorithmlabel\ algorithm}
+        \label{alg:franklins}
+        \begin{algorithmic}[1]
+            \State Initialize process ID and state
+            \Event{MessageFromBottom} { $m$ }
+                \\
+                \If { $m.id > self.id$ } {Start wave}
+                \State Broadcast $m$
+            \Event{MessageFromTop} { $m$ }  
+                \\
+                \If { $m.id > self.id$ } {Start wave}
+                \State Broadcast $m$
+        \end{algorithmic}
+    \end{algorithm}
+    \end{center}
+    \end{frame}
+
+\begin{frame}
+\frametitle{Advantages}
+\framesubtitle{Optimized Message Complexity}
+Offers a significant improvement in terms of message complexity with a worst-case scenario of O(n log n), particularly beneficial for larger ring networks.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Advantages}
+    \framesubtitle{Scalability}
+    Due to its efficient message complexity, it scales well with increasing network size, making it suitable for a wide range of applications.
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Disadvantages}
+    \framesubtitle{Complex Implementation}
+    Implementation of Franklin’s algorithm can be considerably more complex compared to simpler algorithms like Chang and Roberts, requiring a deeper understanding of bidirectional message propagation and collision resolution.
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Disadvantages}
+    \framesubtitle{Communication Channel Requirements}
+    Relies on bidirectional communication channels between neighboring processes, which may pose challenges in certain network architectures where such channels are not readily available or feasible.
+\end{frame}
+
+
+
+
+
 
 
 \section{Experimental results/Proofs}

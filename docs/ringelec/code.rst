@@ -5,6 +5,5 @@ Code Documentation
    :toctree: generated
    :recursive:
 
-   Snapshot.Snapshot
-   Snapshot.ChandyLamportSnapshot
-   Snapshot.LaiYangSnapshot
+   ringelec.ChangRoberts
+   ringelec.Franklins

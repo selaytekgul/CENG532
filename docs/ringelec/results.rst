@@ -6,13 +6,32 @@ Implementation, Results and Discussion
 Implementation and Methodology
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Writing the methodology lies at the core of the paper, and fulfills one of the basic principles underlying the scientific method. Any scientific paper needs to be verifiable by other researchers, so that they can review the results by replicating the experiment and guaranteeing the validity. To assist this, you need to give a completely accurate description of the equipment and the techniques used for gathering the data [Shuttleworth2016]_.
+In this section, the implementation details and methodologies employed for both the Chang and Roberts Algorithm and Franklin's Algorithm are explored.
 
-Other scientists are not going to take your word for it, and they want to be able to evaluate whether your methodology is sound. In addition, it is useful for the reader to understand how you obtained your data, because it allows them to evaluate the quality of the results. For example, if you were trying to obtain data about shopping preferences, you will obtain different results from a multiple-choice questionnaire than from a series of open interviews. Writing methodology allows the reader to make their own decision about the validity of the data. If the research about shopping preferences were built upon a single case study, it would have little external validity, and the reader would treat the results with the contempt that they deserve [Shuttleworth2016]_.
+**Chang and Roberts Algorithm:**
 
-Describe the materials and equipment used in the research. Explain how the samples were gathered, any randomization techniques and how the samples were prepared. Explain how the measurements were made and what calculations were performed upon the raw data. Describe the statistical techniques used upon the data [Shuttleworth2016]_.
+- Approach: Designed for rings where processes have unique identifiers. Messages with process IDs are circulated, and a process remains active if its own ID is larger than the IDs it receives. The process with the largest ID eventually becomes the leader.
+*Advantages:*
 
-Present any important details of your implementation here.
+- Efficiency Improvement: Notably enhances message complexity compared to basic flooding algorithms, contributing to more streamlined communication in ring networks.
+- Straightforward Implementation: Relatively straightforward to implement due to its clear-cut logic and reliance on simple message circulation principles.
+*Disadvantages:*
+
+- Message Complexity: Despite being an improvement over basic flooding algorithms, it still exhibits a worst-case message complexity of O(n^2), which can become prohibitive for larger networks.
+- Dependency on Unique Identifiers: The algorithm heavily relies on the existence of unique identifiers for each process, limiting its applicability in scenarios where such identifiers are not readily available.
+
+**Franklin's Algorithm:**
+
+- Approach: Designed for bidirectional rings. It uses the concept of "waves" of messages, where a process can start a wave if its ID is larger than its neighbors. Waves travel in both directions, and collisions resolve in favor of the larger ID. Eventually, the largest ID prevails.
+*Advantages:*
+
+- Optimized Message Complexity: Offers a significant improvement in terms of message complexity with a worst-case scenario of O(n log n), particularly beneficial for larger ring networks.
+- Scalability: Due to its efficient message complexity, it scales well with increasing network size, making it suitable for a wide range of applications.
+*Disadvantages:*
+
+- Complex Implementation: Implementation of Franklin's algorithm can be considerably more complex compared to simpler algorithms like Chang and Roberts, requiring a deeper understanding of bidirectional message propagation and collision resolution.
+- Communication Channel Requirements: Relies on bidirectional communication channels between neighboring processes, which may pose challenges in certain network architectures where such channels are not readily available or feasible.
+
 
 Results
 ~~~~~~~~
