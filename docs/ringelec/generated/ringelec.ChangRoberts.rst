@@ -1,7 +1,7 @@
-﻿Snapshot.LaiYangSnapshot
-========================
+﻿ringelec.ChangRoberts
+=====================
 
-.. automodule:: Snapshot.LaiYangSnapshot
+.. automodule:: ringelec.ChangRoberts
 
    
    
@@ -17,10 +17,10 @@
 
    .. autosummary::
    
-   .. autoclass:: LaiYangComponentModel
+   .. autoclass:: ChangRobertsMessagePayload
       :members:
       :undoc-members:
-   .. autoclass:: LaiYangState
+   .. autoclass:: ChangRobertsNode
       :members:
       :undoc-members:
    
