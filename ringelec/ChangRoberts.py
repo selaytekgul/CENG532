@@ -153,23 +153,32 @@ class ChangRobertsNode(GenericModel):
                 message = GenericMessage(header, payload)
                 self.send_down(Event(self, EventTypes.MFRT, message))
 
-        elif message_assumed_id < self.id:
-            # This node has received a message with a lower assumed id
-            # So, this node can dismiss the election attempt of the sender node
-            # the message will be updated with this node's id
+            elif message_assumed_id < self.id:
+                # This node has received a message with a lower assumed id
+                # So, this node can dismiss the election attempt of the sender node
+                # the message will be updated with this node's id
 
-            logger.debug(
-                f"🤖 {self.componentinstancenumber} is dismissing {message_assumed_id} that is encountered. This node is at {self.id}"
-            )
+                logger.debug(
+                    f"🤖 {self.componentinstancenumber} is dismissing {message_assumed_id} that is encountered. This node is at {self.id}"
+                )
 
-        elif(
-            message_assumed_id == self.id
-        ):
-            # This node is selected as leader
-            self.state = State.leader
-            logger.debug(
-                f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
-            )            
+                payload.id = self.componentinstancenumber
+                header.messageto = self.next_hop
+                header.nexthop = self.next_hop
+                header.interfaceid = self.next_hop_interface_id
+
+                message = GenericMessage(header, payload)
+                self.send_down(Event(self, EventTypes.MFRT, message))
+
+
+            elif(
+                message_assumed_id == self.id
+            ):
+                # This node is selected as leader
+                self.state = State.leader
+                logger.debug(
+                    f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
+                )            
 
         self.callback.set()
         self.draw_delay.wait()

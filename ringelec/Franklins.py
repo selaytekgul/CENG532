@@ -68,20 +68,35 @@ class FranklinsNode(GenericModel):
         self.state = State.active
 
     def send_election_packet(self):
-        header = FranklinsMessageHeader(
+        header_1 = FranklinsMessageHeader(
             messagefrom=self.componentinstancenumber,
-            messageto=self.next_hop,
+            messageto=self.next_hop_1,
             messagetype="Franklins Message",
-            nexthop=self.next_hop,
+            nexthop=self.next_hop_1,
             interfaceid=self.next_hop_interface_id
 
         )
 
-        payload = FranklinsPayload(
+        payload_1 = FranklinsPayload(
             self.id
         )
 
-        message = GenericMessage(header, payload)
+        header_2 = FranklinsMessageHeader(
+            messagefrom=self.componentinstancenumber,
+            messageto=self.next_hop_2,
+            messagetype="Franklins Message",
+            nexthop=self.next_hop_2,
+            interfaceid=self.next_hop_interface_id
+
+        )
+
+        payload_2 = FranklinsPayload(
+            self.id
+        )
+
+        message = GenericMessage(header_1, payload_1)
+        self.send_down(self, EventTypes.MFRT, message)
+        message = GenericMessage(header_2, payload_2)
         self.send_down(self, EventTypes.MFRT, message)
 
     def on_init(self, eventobj: Event):
@@ -91,14 +106,19 @@ class FranklinsNode(GenericModel):
             f"🤖 {self.componentinstancenumber} selected {self.id} as their ID."
         )
 
-        # Calculate the neighbour, we're on a directed ring
-        self.neighbour_id = (int(self.componentinstancenumber) + 1) % self.ring_size
+        # Calculate the neighbours, we're on a directed ring
+        self.neighbour_id_1 = (int(self.componentinstancenumber) + 1) % self.ring_size
+        self.neighbour_id_2 = (int(self.componentinstancenumber) - 1) % self.ring_size
 
-        self.next_hop = self.topology.get_next_hop(
-            self.componentinstancenumber, self.neighbour_id
+        self.next_hop_1 = self.topology.get_next_hop(
+            self.componentinstancenumber, self.neighbour_id_1
         )
 
-        self.next_hop_interface_id = f"{self.componentinstancenumber}-{self.next_hop}"
+        self.next_hop_2 = self.topology.get_next_hop(
+            self.componentinstancenumber, self.neighbour_id_2
+        )
+
+        self.next_hop_interface_id = f"{self.componentinstancenumber}-{self.next_hop_1}-{self.next_hop_2}"
 
         self.send_election_packet()
 
@@ -127,12 +147,19 @@ class FranklinsNode(GenericModel):
             # header will be updated
             # payload will remain unchanged
 
-            header.messageto = self.next_hop
-            header.nexthop = self.next_hop
+            header.messageto = self.next_hop_1
+            header.nexthop = self.next_hop_1
             header.interfaceid = self.next_hop_interface_id
 
-            message = GenericMessage(header, payload)
-            self.send_down(Event(self, EventTypes.MFRT, message))
+            message_1 = GenericMessage(header, payload)
+            self.send_down(Event(self, EventTypes.MFRT, message_1))
+
+            header.messageto = self.next_hop_2
+            header.nexthop = self.next_hop_2
+            header.interfaceid = self.next_hop_interface_id
+
+            message_2 = GenericMessage(header, payload)
+            self.send_down(Event(self, EventTypes.MFRT, message_2))
 
         elif self.state == State.active:
 
@@ -146,30 +173,53 @@ class FranklinsNode(GenericModel):
 
                 self.state = State.passive
                 
-                header.messageto = self.next_hop
-                header.nexthop = self.next_hop
+                header.messageto = self.next_hop_1
+                header.nexthop = self.next_hop_1
                 header.interfaceid = self.next_hop_interface_id
 
-                message = GenericMessage(header, payload)
-                self.send_down(Event(self, EventTypes.MFRT, message))
+                message_1 = GenericMessage(header, payload)
+                self.send_down(Event(self, EventTypes.MFRT, message_1))
 
-        elif message_assumed_id < self.id:
-            # This node has received a message with a lower assumed id
-            # So, this node can dismiss the election attempt of the sender node
-            # the message will be updated with this node's id
+                header.messageto = self.next_hop_2
+                header.nexthop = self.next_hop_2
+                header.interfaceid = self.next_hop_interface_id
 
-            logger.debug(
-                f"🤖 {self.componentinstancenumber} is dismissing {message_assumed_id} that is encountered. This node is at {self.id}"
-            )
+                message_2 = GenericMessage(header, payload)
+                self.send_down(Event(self, EventTypes.MFRT, message_2))
 
-        elif(
-            message_assumed_id == self.id
-        ):
-            # This node is selected as leader
-            self.state = State.leader
-            logger.debug(
-                f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
-            )            
+            elif message_assumed_id < self.id:
+                # This node has received a message with a lower assumed id
+                # So, this node can dismiss the election attempt of the sender node
+                # the message will be updated with this node's id
+
+                logger.debug(
+                    f"🤖 {self.componentinstancenumber} is dismissing {message_assumed_id} that is encountered. This node is at {self.id}"
+                )
+
+                payload.id = self.componentinstancenumber
+
+                header.messageto = self.next_hop_1
+                header.nexthop = self.next_hop_1
+                header.interfaceid = self.next_hop_interface_id
+
+                message_1 = GenericMessage(header, payload)
+                self.send_down(Event(self, EventTypes.MFRT, message_1))
+
+                header.messageto = self.next_hop_2
+                header.nexthop = self.next_hop_2
+                header.interfaceid = self.next_hop_interface_id
+
+                message_2 = GenericMessage(header, payload)
+                self.send_down(Event(self, EventTypes.MFRT, message_2))
+
+            elif(
+                message_assumed_id == self.id
+            ):
+                # This node is selected as leader
+                self.state = State.leader
+                logger.debug(
+                    f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
+                )            
 
         self.callback.set()
         self.draw_delay.wait()
