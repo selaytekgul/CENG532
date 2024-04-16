@@ -17,10 +17,16 @@
 
    .. autosummary::
    
-   .. autoclass:: ChangRobertsMessagePayload
+   .. autoclass:: ChangRobertsMessageHeader
       :members:
       :undoc-members:
    .. autoclass:: ChangRobertsNode
+      :members:
+      :undoc-members:
+   .. autoclass:: ChangRobertsPayload
+      :members:
+      :undoc-members:
+   .. autoclass:: State
       :members:
       :undoc-members:
    
