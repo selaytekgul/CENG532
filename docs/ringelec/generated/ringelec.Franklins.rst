@@ -17,10 +17,16 @@
 
    .. autosummary::
    
-   .. autoclass:: FranklinMessagePayload
+   .. autoclass:: FranklinsMessageHeader
       :members:
       :undoc-members:
-   .. autoclass:: FranklinNode
+   .. autoclass:: FranklinsNode
+      :members:
+      :undoc-members:
+   .. autoclass:: FranklinsPayload
+      :members:
+      :undoc-members:
+   .. autoclass:: State
       :members:
       :undoc-members:
    

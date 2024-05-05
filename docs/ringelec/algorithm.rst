@@ -217,12 +217,14 @@ Process A (ID = 3):
 
 - Receives ID = 7 from C and ID = 5 from B.
 - ID 7 is greater than 3, so A becomes passive and forwards ID = 7 to B.
-- ID 5 is smaller than 3, so A discards the message from B.
+- ID 5 is greater than 3, so A becomes passive and forwards ID = 5 to C.
+
 Process B (ID = 5):
 
 - Receives ID = 3 from A and ID = 7 from C.
 - ID 3 is smaller than 5, so B discards the message from A.
 - ID 7 is greater than 5, so B becomes passive and forwards ID = 7 to C.
+
 Process C (ID = 7):
 
 - Receives ID = 5 from B and ID = 3 from A.
@@ -240,18 +242,21 @@ Process A (ID = 3):
 
 Receives ID = 7 from C.
 A is passive, so it checks the parity of the round. Since the parity matches the round number (even), A declares itself as the leader.
+
 Process B (ID = 5):
 
 Receives ID = 7 from C.
 B is passive and does not take any action.
+
 Process C (ID = 7):
 
 Receives ID = 7 from both A and B.
 C is active but does not need to proceed as it has received its own ID from both neighbors.
+
 Leader Detection:
 
-Process A, upon receiving its own ID from C, declares itself as the leader.
-Therefore, in this example, Process A is elected as the leader using Franklin's algorithm in an undirected ring topology with processes A, B, and C.
+Process C, upon receiving its own ID, declares itself as the leader.
+Therefore, in this example, Process C is elected as the leader using Franklin's algorithm in an undirected ring topology with processes A, B, and C.
 
 Correctness
 ~~~~~~~~~~~
