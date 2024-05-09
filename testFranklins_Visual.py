@@ -54,7 +54,8 @@ def main():
         pos = nx.circular_layout(G, center=(0, 0))
 
         for nodeID in topology.nodes:
-            node = Topology().nodes[nodeID]
+            node = topology.nodes[nodeID]
+            node.id_p = nodeID
             G.nodes[nodeID]["id_p"] = node.id_p
             assumed_ids.append(node.id_p)
 

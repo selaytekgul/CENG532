@@ -57,6 +57,8 @@ class FranklinsNode(GenericModel):
     callback = None
     draw_delay = None
     global_round = 1
+    id_counter = 0
+
 
     def __init__(self, componentname, componentinstancenumber, context=None, configurationparameters=None, num_worker_threads=1, topology=None, child_conn=None, node_queues=None, channel_queues=None):
         super().__init__(componentname, componentinstancenumber, context, configurationparameters, num_worker_threads, topology, child_conn, node_queues, channel_queues)
@@ -102,7 +104,9 @@ class FranklinsNode(GenericModel):
 
     def on_init(self, eventobj: Event):
         # Select an id for round 1
-        self.id_p = randint(1, self.ring_size)
+        # self.id_p = randint(1, self.ring_size)
+        self.id_p = self.id_counter
+        self.id_counter += 1
         print(
             f"🤖 {self.componentinstancenumber} selected {self.id} as their ID."
         )
@@ -121,7 +125,8 @@ class FranklinsNode(GenericModel):
 
         self.next_hop_interface_id = f"{self.componentinstancenumber}-{self.next_hop_1}-{self.next_hop_2}"
 
-        self.send_election_packet()
+        if(self.id_p == 0):
+            self.send_election_packet()
 
     
     def pass_packet_along(self, message):
