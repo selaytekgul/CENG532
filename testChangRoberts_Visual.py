@@ -28,13 +28,13 @@ FPS = 1
 def main():
     n = int(sys.argv[1])
     print(f"Creating a ring with size {n}")
-    G = nx.cycle_graph(n)
+    Graph = nx.cycle_graph(n)
 
     plt.ion()
     fig = plt.figure(num=0)
 
     topology = Topology()
-    topology.construct_from_graph(G, ChangRobertsNode, GenericChannel)
+    topology.construct_from_graph(Graph, ChangRobertsNode, GenericChannel)
     topology.start()
     ChangRobertsNode.ring_size = n
 
@@ -49,12 +49,13 @@ def main():
         node_colours = list()
         font_colours = list()
 
-        G = topology.G
-        pos = nx.circular_layout(G, center=(0, 0))
+        Graph = topology.G
+        pos = nx.circular_layout(Graph, center=(0, 0))
 
         for nodeID in topology.nodes:
-            node = Topology().nodes[nodeID]
-            G.nodes[nodeID]["id_p"] = node.id_p
+            node = topology.nodes[nodeID]
+            node.id_p = nodeID
+            Graph.nodes[nodeID]["id_p"] = node.id_p
             assumed_ids.append(node.id_p)
 
             if node.state == State.active:
@@ -74,10 +75,10 @@ def main():
             d = 0.1
             node_id_label_pos[key] = (x + d * cos(theta), y + d * sin(theta))
 
-        node_id_labels = nx.get_node_attributes(G, "id_p")
+        node_id_labels = nx.get_node_attributes(Graph, "id_p")
 
         nx.draw(
-            G,
+            Graph,
             pos,
             node_color=node_colours,
             edge_color=EDGE_COLOUR,
@@ -85,7 +86,7 @@ def main():
             font_weight="bold",
         )
 
-        nx.draw_networkx_labels(G, node_id_label_pos, node_id_labels)
+        nx.draw_networkx_labels(Graph, node_id_label_pos, node_id_labels)
 
         fig.text(0.2, 0.2, f"Round: {ChangRobertsNode.global_round}")
 

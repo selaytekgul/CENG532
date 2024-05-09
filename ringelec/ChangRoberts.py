@@ -58,6 +58,7 @@ class ChangRobertsNode(GenericModel):
     callback = None
     draw_delay = None
     global_round = 1
+    id_counter = 0
 
     def __init__(self, componentname, componentinstancenumber, context=None, configurationparameters=None, num_worker_threads=1, topology=None, child_conn=None, node_queues=None, channel_queues=None):
         super().__init__(componentname, componentinstancenumber, context, configurationparameters, num_worker_threads, topology, child_conn, node_queues, channel_queues)
@@ -89,8 +90,10 @@ class ChangRobertsNode(GenericModel):
     # def on_init(self):
     def on_init(self, eventobj: Event):
         # Select an id for round 1
-        self.id_p = randint(1, self.ring_size)
-        logger.debug(
+        # self.id_p = randint(1, self.ring_size)
+        self.id_p = self.id_counter
+        self.id_counter += 1
+        print(
             f"🤖 {self.componentinstancenumber} selected {self.id} as their ID."
         )
 
@@ -103,7 +106,8 @@ class ChangRobertsNode(GenericModel):
 
         self.next_hop_interface_id = f"{self.componentinstancenumber}-{self.next_hop}"
 
-        self.send_election_packet()
+        if(self.id_p == 0):
+            self.send_election_packet()
 
     
     def pass_packet_along(self, message):
@@ -143,7 +147,7 @@ class ChangRobertsNode(GenericModel):
                 # Another node has a higher id than this node
                 # going passive
 
-                logger.debug(
+                print(
                     f"🤖 {self.componentinstancenumber} is PASSIVE: {message_assumed_id} is encountered, this node is at {self.id}"
                 )
 
@@ -161,7 +165,7 @@ class ChangRobertsNode(GenericModel):
                 # So, this node can dismiss the election attempt of the sender node
                 # the message will be updated with this node's id
 
-                logger.debug(
+                print(
                     f"🤖 {self.componentinstancenumber} is dismissing {message_assumed_id} that is encountered. This node is at {self.id}"
                 )
 
@@ -179,7 +183,7 @@ class ChangRobertsNode(GenericModel):
             ):
                 # This node is selected as leader
                 self.state = State.leader
-                logger.debug(
+                print(
                     f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
                 )
                 ChangRobertsNode.global_round = 3

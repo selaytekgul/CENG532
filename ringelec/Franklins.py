@@ -103,7 +103,7 @@ class FranklinsNode(GenericModel):
     def on_init(self, eventobj: Event):
         # Select an id for round 1
         self.id_p = randint(1, self.ring_size)
-        logger.debug(
+        print(
             f"🤖 {self.componentinstancenumber} selected {self.id} as their ID."
         )
 
@@ -168,7 +168,7 @@ class FranklinsNode(GenericModel):
                 # Another node has a higher id than this node
                 # going passive
 
-                logger.debug(
+                print(
                     f"🤖 {self.componentinstancenumber} is PASSIVE: {message_assumed_id} is encountered, this node is at {self.id}"
                 )
 
@@ -193,7 +193,7 @@ class FranklinsNode(GenericModel):
                 # So, this node can dismiss the election attempt of the sender node
                 # the message will be updated with this node's id
 
-                logger.debug(
+                print(
                     f"🤖 {self.componentinstancenumber} is dismissing {message_assumed_id} that is encountered. This node is at {self.id}"
                 )
 
@@ -218,7 +218,7 @@ class FranklinsNode(GenericModel):
             ):
                 # This node is selected as leader
                 self.state = State.leader
-                logger.debug(
+                print(
                     f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
                 )
                 FranklinsNode.global_round = 3
