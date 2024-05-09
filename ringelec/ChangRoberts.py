@@ -57,7 +57,7 @@ class ChangRobertsNode(GenericModel):
     ring_size = 0
     callback = None
     draw_delay = None
-    global_round = 1
+    global_round = 0
     id_counter = 0
 
     def __init__(self, componentname, componentinstancenumber, context=None, configurationparameters=None, num_worker_threads=1, topology=None, child_conn=None, node_queues=None, channel_queues=None):
@@ -86,6 +86,8 @@ class ChangRobertsNode(GenericModel):
 
         message = GenericMessage(header, payload)
         self.send_down(Event(self, EventTypes.MFRT, message))
+        ChangRobertsNode.global_round += 1
+
 
     # def on_init(self):
     def on_init(self, eventobj: Event):
@@ -140,6 +142,8 @@ class ChangRobertsNode(GenericModel):
 
             message = GenericMessage(header, payload)
             self.send_down(Event(self, EventTypes.MFRT, message))
+            ChangRobertsNode.global_round += 1
+
 
         elif self.state == State.active:
 
@@ -159,6 +163,8 @@ class ChangRobertsNode(GenericModel):
 
                 message = GenericMessage(header, payload)
                 self.send_down(Event(self, EventTypes.MFRT, message))
+                ChangRobertsNode.global_round += 1
+
 
             elif message_assumed_id < self.id:
                 # This node has received a message with a lower assumed id
@@ -176,6 +182,9 @@ class ChangRobertsNode(GenericModel):
 
                 message = GenericMessage(header, payload)
                 self.send_down(Event(self, EventTypes.MFRT, message))
+                ChangRobertsNode.global_round += 1
+
+
 
 
             elif(
@@ -185,9 +194,7 @@ class ChangRobertsNode(GenericModel):
                 self.state = State.leader
                 print(
                     f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
-                )
-                ChangRobertsNode.global_round = 3
-            
+                )            
 
         self.callback.set()
         self.draw_delay.wait()

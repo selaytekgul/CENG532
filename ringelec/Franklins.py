@@ -99,8 +99,10 @@ class FranklinsNode(GenericModel):
 
         message = GenericMessage(header_1, payload_1)
         self.send_down(Event(self, EventTypes.MFRT, message))
+        FranklinsNode.global_round += 1
         message = GenericMessage(header_2, payload_2)
         self.send_down(Event(self, EventTypes.MFRT, message))
+        FranklinsNode.global_round += 1
 
     def on_init(self, eventobj: Event):
         # Select an id for round 1
@@ -159,6 +161,7 @@ class FranklinsNode(GenericModel):
 
             message_1 = GenericMessage(header, payload)
             self.send_down(Event(self, EventTypes.MFRT, message_1))
+            FranklinsNode.global_round += 1
 
             header.messageto = self.next_hop_2
             header.nexthop = self.next_hop_2
@@ -166,6 +169,7 @@ class FranklinsNode(GenericModel):
 
             message_2 = GenericMessage(header, payload)
             self.send_down(Event(self, EventTypes.MFRT, message_2))
+            FranklinsNode.global_round += 1
 
         elif self.state == State.active:
 
@@ -185,6 +189,7 @@ class FranklinsNode(GenericModel):
 
                 message_1 = GenericMessage(header, payload)
                 self.send_down(Event(self, EventTypes.MFRT, message_1))
+                FranklinsNode.global_round += 1
 
                 header.messageto = self.next_hop_2
                 header.nexthop = self.next_hop_2
@@ -192,6 +197,7 @@ class FranklinsNode(GenericModel):
 
                 message_2 = GenericMessage(header, payload)
                 self.send_down(Event(self, EventTypes.MFRT, message_2))
+                FranklinsNode.global_round += 1
 
             elif message_assumed_id < self.id:
                 # This node has received a message with a lower assumed id
@@ -210,6 +216,7 @@ class FranklinsNode(GenericModel):
 
                 message_1 = GenericMessage(header, payload)
                 self.send_down(Event(self, EventTypes.MFRT, message_1))
+                FranklinsNode.global_round += 1
 
                 header.messageto = self.next_hop_2
                 header.nexthop = self.next_hop_2
@@ -217,6 +224,7 @@ class FranklinsNode(GenericModel):
 
                 message_2 = GenericMessage(header, payload)
                 self.send_down(Event(self, EventTypes.MFRT, message_2))
+                FranklinsNode.global_round += 1
 
             elif(
                 message_assumed_id == self.id
@@ -226,8 +234,6 @@ class FranklinsNode(GenericModel):
                 print(
                     f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
                 )
-                FranklinsNode.global_round = 3
-
 
         self.callback.set()
         self.draw_delay.wait()

@@ -88,7 +88,7 @@ def main():
 
         nx.draw_networkx_labels(Graph, node_id_label_pos, node_id_labels)
 
-        fig.text(0.2, 0.2, f"Round: {ChangRobertsNode.global_round}")
+        fig.text(0.2, 0.2, f"Number of messages passed: {ChangRobertsNode.global_round}")
 
         fig.canvas.draw()
         fig.canvas.flush_events()
