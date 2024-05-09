@@ -56,6 +56,7 @@ class FranklinsNode(GenericModel):
     ring_size = 0
     callback = None
     draw_delay = None
+    global_round = 1
 
     def __init__(self, componentname, componentinstancenumber, context=None, configurationparameters=None, num_worker_threads=1, topology=None, child_conn=None, node_queues=None, channel_queues=None):
         super().__init__(componentname, componentinstancenumber, context, configurationparameters, num_worker_threads, topology, child_conn, node_queues, channel_queues)
@@ -95,9 +96,9 @@ class FranklinsNode(GenericModel):
         )
 
         message = GenericMessage(header_1, payload_1)
-        self.send_down(self, EventTypes.MFRT, message)
+        self.send_down(Event(self, EventTypes.MFRT, message))
         message = GenericMessage(header_2, payload_2)
-        self.send_down(self, EventTypes.MFRT, message)
+        self.send_down(Event(self, EventTypes.MFRT, message))
 
     def on_init(self, eventobj: Event):
         # Select an id for round 1
@@ -219,7 +220,9 @@ class FranklinsNode(GenericModel):
                 self.state = State.leader
                 logger.debug(
                     f"🤖 {self.componentinstancenumber}: I'M THE ELECTED LEADER"
-                )            
+                )
+                FranklinsNode.global_round = 3
+
 
         self.callback.set()
         self.draw_delay.wait()
