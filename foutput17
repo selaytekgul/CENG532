@@ -1,0 +1,80 @@
+Creating a ring with size 17
+🤖 0 selected 0 as their ID.
+🤖 1 selected 1 as their ID.
+🤖 2 selected 2 as their ID.
+🤖 3 selected 3 as their ID.
+🤖 4 selected 4 as their ID.
+🤖 5 selected 5 as their ID.
+🤖 6 selected 6 as their ID.
+🤖 7 selected 7 as their ID.
+🤖 8 selected 8 as their ID.
+🤖 9 selected 9 as their ID.
+🤖 10 selected 10 as their ID.
+🤖 11 selected 11 as their ID.
+🤖 12 selected 12 as their ID.
+🤖 13 selected 13 as their ID.
+🤖 14 selected 14 as their ID.
+🤖 15 selected 15 as their ID.
+🤖 16 selected 16 as their ID.
+🤖 16 is dismissing 0 that is encountered. This node is at 16
+🤖 2 is dismissing 1 that is encountered. This node is at 2
+🤖 3 is dismissing 2 that is encountered. This node is at 3
+🤖 4 is dismissing 3 that is encountered. This node is at 4
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 6 is dismissing 5 that is encountered. This node is at 6
+🤖 7 is dismissing 6 that is encountered. This node is at 7
+🤖 8 is dismissing 7 that is encountered. This node is at 8
+🤖 9 is dismissing 8 that is encountered. This node is at 9
+🤖 10 is dismissing 9 that is encountered. This node is at 10
+🤖 11 is dismissing 10 that is encountered. This node is at 11
+🤖 12 is dismissing 11 that is encountered. This node is at 12
+🤖 13 is dismissing 12 that is encountered. This node is at 13
+🤖 14 is dismissing 13 that is encountered. This node is at 14
+🤖 15 is dismissing 14 that is encountered. This node is at 15
+🤖 1 is PASSIVE: 16 is encountered, this node is at 1
+🤖 0 is PASSIVE: 2 is encountered, this node is at 0
+🤖 2 is dismissing 1 that is encountered. This node is at 2
+🤖 4 is dismissing 3 that is encountered. This node is at 4
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 16 is dismissing 0 that is encountered. This node is at 16
+🤖 6 is dismissing 5 that is encountered. This node is at 6
+🤖 7 is dismissing 6 that is encountered. This node is at 7
+🤖 8 is dismissing 7 that is encountered. This node is at 8
+🤖 9 is dismissing 8 that is encountered. This node is at 9
+🤖 10 is dismissing 9 that is encountered. This node is at 10
+🤖 11 is dismissing 10 that is encountered. This node is at 11
+🤖 12 is dismissing 11 that is encountered. This node is at 12
+🤖 13 is dismissing 12 that is encountered. This node is at 13
+🤖 14 is dismissing 13 that is encountered. This node is at 14
+🤖 15 is dismissing 14 that is encountered. This node is at 15
+🤖 3 is dismissing 2 that is encountered. This node is at 3
+🤖 2 is PASSIVE: 4 is encountered, this node is at 2
+🤖 16 is dismissing 15 that is encountered. This node is at 16
+🤖 6 is dismissing 5 that is encountered. This node is at 6
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 7 is dismissing 6 that is encountered. This node is at 7
+🤖 10 is dismissing 9 that is encountered. This node is at 10
+🤖 8 is dismissing 7 that is encountered. This node is at 8
+🤖 11 is dismissing 10 that is encountered. This node is at 11
+🤖 12 is dismissing 11 that is encountered. This node is at 12
+🤖 9 is dismissing 8 that is encountered. This node is at 9
+🤖 14 is dismissing 13 that is encountered. This node is at 14
+🤖 13 is dismissing 12 that is encountered. This node is at 13
+🤖 15 is PASSIVE: 16 is encountered, this node is at 15
+🤖 4 is dismissing 3 that is encountered. This node is at 4
+🤖 3 is dismissing 2 that is encountered. This node is at 3
+🤖 3: I'M THE ELECTED LEADER
+🤖 5: I'M THE ELECTED LEADER
+🤖 10: I'M THE ELECTED LEADER
+🤖 12: I'M THE ELECTED LEADER
+🤖 11: I'M THE ELECTED LEADER
+🤖 8: I'M THE ELECTED LEADER
+🤖 14: I'M THE ELECTED LEADER
+🤖 16 is dismissing 15 that is encountered. This node is at 16
+🤖 9: I'M THE ELECTED LEADER
+🤖 13: I'M THE ELECTED LEADER
+🤖 6: I'M THE ELECTED LEADER
+🤖 4: I'M THE ELECTED LEADER
+🤖 7: I'M THE ELECTED LEADER
+🤖 16 is dismissing 15 that is encountered. This node is at 16
+🤖 16: I'M THE ELECTED LEADER

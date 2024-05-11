@@ -1,0 +1,21 @@
+Creating a ring with size 6
+🤖 0 selected 0 as their ID.
+🤖 1 selected 1 as their ID.
+🤖 2 selected 2 as their ID.
+🤖 3 selected 3 as their ID.
+🤖 4 selected 4 as their ID.
+🤖 5 selected 5 as their ID.
+🤖 5 is dismissing 0 that is encountered. This node is at 5
+🤖 2 is dismissing 1 that is encountered. This node is at 2
+🤖 3 is dismissing 2 that is encountered. This node is at 3
+🤖 4 is dismissing 3 that is encountered. This node is at 4
+🤖 1 is PASSIVE: 5 is encountered, this node is at 1
+🤖 0 is PASSIVE: 2 is encountered, this node is at 0
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 4 is PASSIVE: 5 is encountered, this node is at 4
+🤖 3 is dismissing 2 that is encountered. This node is at 3
+🤖 2 is PASSIVE: 4 is encountered, this node is at 2
+🤖 3 is PASSIVE: 5 is encountered, this node is at 3
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 5 is dismissing 3 that is encountered. This node is at 5
+🤖 5: I'M THE ELECTED LEADER

@@ -1,0 +1,9 @@
+Creating a ring with size 3
+🤖 0 selected 0 as their ID.
+🤖 1 selected 1 as their ID.
+🤖 2 selected 2 as their ID.
+🤖 2 is dismissing 0 that is encountered. This node is at 2
+🤖 1 is PASSIVE: 2 is encountered, this node is at 1
+🤖 0 is PASSIVE: 1 is encountered, this node is at 0
+🤖 2 is dismissing 1 that is encountered. This node is at 2
+🤖 2: I'M THE ELECTED LEADER

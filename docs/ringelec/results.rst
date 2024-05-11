@@ -35,12 +35,13 @@ In this section, the implementation details and methodologies employed for both 
 
 Results
 ~~~~~~~~
+**Chang and Roberts Algorithm:**
 
-Present your AHCv2 run results, plot figures.
+The simulation results demonstrate that the Chang and Roberts Algorithm effectively elects a leader within directed ring networks. Despite its relatively higher message complexity compared to Franklin’s Algorithm, it showcases robust performance, particularly in scenarios where unique identifiers are readily available.
 
+**Franklin’s Algorithm:**
 
-This is probably the most variable part of any research paper, and depends upon the results and aims of the experiment. For quantitative research, it is a presentation of the numerical results and data, whereas for qualitative research it should be a broader discussion of trends, without going into too much detail. For research generating a lot of results, then it is better to include tables or graphs of the analyzed data and leave the raw data in the appendix, so that a researcher can follow up and check your calculations. A commentary is essential to linking the results together, rather than displaying isolated and unconnected charts, figures and findings. It can be quite difficulty to find a good balance between the results and the discussion section, because some findings, especially in a quantitative or descriptive experiment, will fall into a grey area. As long as you not repeat yourself to often, then there should be no major problem. It is best to try to find a middle course, where you give a general overview of the data and then expand upon it in the discussion - you should try to keep your own opinions and interpretations out of the results section, saving that for the discussion [Shuttleworth2016]_.
-
+Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks, making it a suitable choice for scenarios where minimizing message overhead is critical.
 
 .. image:: figures/CDFInterferecePowerFromKthNode2.png
   :width: 400
@@ -61,12 +62,16 @@ This is probably the most variable part of any research paper, and depends upon 
      - Row 2, column 2
      - Row 2, column 3
 
+
 Discussion
 ~~~~~~~~~~
 
-Present and discuss main learning points.
+**Comparative Analysis:**
 
+Comparing the two algorithms, it becomes evident that their suitability depends on various factors such as network topology, message complexity constraints, and availability of unique identifiers for processes.
 
+**Network Topology:** Chang and Roberts Algorithm excels in directed ring networks, leveraging process IDs for efficient leader election. On the other hand, Franklin’s Algorithm performs optimally in undirected ring topologies, offering improved scalability and message complexity management.
 
+**Message Complexity:** While both algorithms aim to minimize message overhead, Franklin’s Algorithm demonstrates superior performance in this aspect, particularly in larger networks. This makes it preferable for scenarios where reducing communication costs is paramount.
 
-.. [Shuttleworth2016] M. Shuttleworth. (2016) Writing methodology. `Online <https://explorable.com/writing-methodology>`_.
+**Resource Constraints:** In scenarios where unique identifiers are readily available and the network topology allows for bidirectional communication, Franklin’s Algorithm emerges as an efficient choice. However, in cases where unique identifiers are guaranteed and directed communication is favored, Chang and Roberts Algorithm remains a robust option despite its slightly higher message complexity.

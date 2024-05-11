@@ -1,0 +1,44 @@
+Creating a ring with size 10
+🤖 1 selected 1 as their ID.
+🤖 0 selected 0 as their ID.
+🤖 2 selected 2 as their ID.
+🤖 3 selected 3 as their ID.
+🤖 4 selected 4 as their ID.
+🤖 5 selected 5 as their ID.
+🤖 6 selected 6 as their ID.
+🤖 9 selected 9 as their ID.
+🤖 7 selected 7 as their ID.
+🤖 8 selected 8 as their ID.
+🤖 9 is dismissing 0 that is encountered. This node is at 9
+🤖 2 is dismissing 1 that is encountered. This node is at 2
+🤖 3 is dismissing 2 that is encountered. This node is at 3
+🤖 4 is dismissing 3 that is encountered. This node is at 4
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 6 is dismissing 5 that is encountered. This node is at 6
+🤖 7 is dismissing 6 that is encountered. This node is at 7
+🤖 8 is dismissing 7 that is encountered. This node is at 8
+🤖 0 is PASSIVE: 2 is encountered, this node is at 0
+🤖 1 is PASSIVE: 9 is encountered, this node is at 1
+🤖 9 is dismissing 0 that is encountered. This node is at 9
+🤖 4 is dismissing 3 that is encountered. This node is at 4
+🤖 6 is dismissing 5 that is encountered. This node is at 6
+🤖 8 is dismissing 7 that is encountered. This node is at 8
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 2 is dismissing 1 that is encountered. This node is at 2
+🤖 3 is dismissing 2 that is encountered. This node is at 3
+🤖 7 is dismissing 6 that is encountered. This node is at 7
+🤖 9 is dismissing 8 that is encountered. This node is at 9
+🤖 5 is dismissing 4 that is encountered. This node is at 5
+🤖 2 is PASSIVE: 5 is encountered, this node is at 2
+🤖 4 is dismissing 3 that is encountered. This node is at 4
+🤖 3 is PASSIVE: 5 is encountered, this node is at 3
+🤖 6 is dismissing 5 that is encountered. This node is at 6
+🤖 7 is dismissing 6 that is encountered. This node is at 7
+🤖 8 is PASSIVE: 9 is encountered, this node is at 8
+🤖 6: I'M THE ELECTED LEADER
+🤖 7: I'M THE ELECTED LEADER
+🤖 9 is dismissing 8 that is encountered. This node is at 9
+🤖 5: I'M THE ELECTED LEADER
+🤖 4: I'M THE ELECTED LEADER
+🤖 9 is dismissing 8 that is encountered. This node is at 9
+🤖 9: I'M THE ELECTED LEADER

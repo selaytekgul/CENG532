@@ -35,7 +35,7 @@
 \def\false{\textbf{F}}
 
 
-\author[Selay Tekgül]{Selayy Tekgül\\\href{mailto:selay@ceng.metu.edu.tr}{selay@ceng.metu.edu.tr}}
+\author[Selay Tekgül]{Selay Tekgül\\\href{mailto:selay@ceng.metu.edu.tr}{selay@ceng.metu.edu.tr}}
 %\author[J.\,Doe \& J.\,Doe]
 %{%
 %  \texorpdfstring{
@@ -341,8 +341,8 @@ Offers a significant improvement in terms of message complexity with a worst-cas
 \frametitle{Main Result 1}
 \framesubtitle{}
 Choose \textbf{just the key results}. They should be important, non-trivial, should give the flavour of the rest of the technical details and should be presentable in a relatively short period of time. Use figures instead of tables instead of text.
+\nocite{fokking2013, tel2001, changroberts1979, franklin1982}
 
-Better to present 10\% the entire audience gets than 90\% nobody gets
 \end{frame}
 
 
@@ -379,48 +379,25 @@ Better to present 10\% the entire audience gets than 90\% nobody gets
 \section{Conclusions}
 \begin{frame}
 \frametitle{Conclusions}
-\framesubtitle{Hindsight is Clearer than Foresight}
-Advices come from \cite{spillman2000present}.
+\framesubtitle{Selecting the Right Leader Election Algorithm for Distributed Systems}
 \begin{itemize}
-\item You can now make observations that would have been confusing if they were introduced earlier. Use this opportunity to refer to statements that you have made in the previous three sections and weave them into a coherent synopsis. You will regain the attention of the non- experts, who probably didn’t follow all of the Technicalities section. Leave them feeling that they have learned something nonetheless.
-\item Give Open Problems It is traditional to end with a list of open problems that arise from your paper. Mention weaknesses of your paper, possible generalizations, and indications of whether they will be fruitful or not. This way you may defuse antagonistic questions during question time.
-\item Indicate that your Talk is Over
-An acceptable way to do this is to say “Thank-you. Are there any questions?”\cite{einstein}
+    \item Thorough analysis and comparison of Chang and Roberts Algorithm and Franklin’s Algorithm for leader election in ring networks within distributed systems.
+    \item Both algorithms demonstrated effectiveness in leader election, each with its own advantages and disadvantages.
+    \item Findings provide insights into selecting appropriate leader election algorithm based on network characteristics and resource constraints.
+    \item Future research could explore hybrid approaches or optimizations to address limitations and enhance applicability in diverse distributed system environments.
 \end{itemize}
 
 \end{frame}
 
 \section*{References}
 \begin{frame}{References}
-\tiny
+%\tiny
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
+\nocite{*} % used here because no citation happens in slides
 \end{frame}
-
-\begin{frame}{How to prepare the talk?}
-Please read \url{http://larc.unt.edu/ian/pubs/speaker.pdf}
-\begin{itemize}
-\item The Introduction:  Define the Problem,    Motivate the Audience,    Introduce Terminology,    Discuss Earlier Work,    Emphasize the Contributions of your Paper,    Provide a Road-map.
-\item The Body:    Abstract the Major Results, Explain the Significance of the Results, Sketch a Proof of the Crucial Results
-\item Technicalities: Present a Key Lemma, Present it Carefully
-\item The Conclusion: Hindsight is Clearer than Foresight, Give Open Problems, Indicate that your Talk is Over
-\end{itemize}
-
-\note{
-\begin{itemize}
-\item The Introduction:  Define the Problem,    Motivate the Audience,    Introduce Terminology,    Discuss Earlier Work,    Emphasize the Contributions of your Paper,    Provide a Road-map.
-\item The Body:    Abstract the Major Results, Explain the Significance of the Results, Sketch a Proof of the Crucial Results
-\item Technicalities: Present a Key Lemma, Present it Carefully
-\item The Conclusion: Hindsight is Clearer than Foresight, Give Open Problems, Indicate that your Talk is Over 
-\end{itemize}
-}
-\end{frame}
-
 
 
 \thankslide
-
-
-
 
 \end{document}

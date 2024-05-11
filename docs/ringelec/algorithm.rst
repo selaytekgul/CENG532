@@ -69,6 +69,10 @@ Application of the provided algorithm to a scenario involving three processes: A
 **Initialization:**
 
 Each process is assigned a unique identifier.
+
+- Process A has ID = 3
+- Process B has ID = 5
+- Process C has ID = 7
 Process A's successor is B, Process B's successor is C, and Process C's successor is A.
 
 **Sending Messages:**
@@ -89,7 +93,7 @@ Since the received identifier (C's identifier) is greater than its own identifie
 
 **Detecting the Leader:**
 Each process monitors the messages it sends.
-When Process A detects its own message returning to it, it declares itself as the leader.
+When Process C detects its own message returning to it, it declares itself as the leader.
 This example demonstrates the application of the algorithm with three processes (A, B, and C), where each process sends messages to its successor in the ring, evaluates received messages based on their identifiers, and ultimately identifies the leader based on the return of its own message.
 
 Correctness
