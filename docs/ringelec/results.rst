@@ -43,24 +43,135 @@ The simulation results demonstrate that the Chang and Roberts Algorithm effectiv
 
 Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks, making it a suitable choice for scenarios where minimizing message overhead is critical.
 
-.. image:: figures/CDFInterferecePowerFromKthNode2.png
-  :width: 400
-  :alt: Impact of interference power
+Results
+-------
+
+**Chang and Roberts Algorithm:**
+
+The simulation results demonstrate that the Chang and Roberts Algorithm effectively elects a leader within directed ring networks. Despite its relatively higher message complexity compared to Franklin’s Algorithm (see Table 1), it showcases robust performance, particularly in scenarios where unique identifiers are readily available (see Figure 1).
+
+**Franklin’s Algorithm:**
+
+Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks (see Table 2), making it a suitable choice for scenarios where minimizing message overhead is critical (see Figure 2).
 
 
-.. list-table:: Title
-   :widths: 25 25 50
+Results
+-------
+
+**Chang and Roberts Algorithm:**
+
+The simulation results demonstrate that the Chang and Roberts Algorithm effectively elects a leader within directed ring networks. Despite its relatively higher message complexity compared to Franklin’s Algorithm (see Table 1), it showcases robust performance, particularly in scenarios where unique identifiers are readily available (see Figure 1).
+
+**Franklin’s Algorithm:**
+
+Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks (see Table 2), making it a suitable choice for scenarios where minimizing message overhead is critical (see Figure 2).
+
+Chang Roberts Algorithm Number of Messages based on Number of Nodes
+--------------------------------------------------------
+
+.. figure:: figures/changroberts_graph.png
+   :width: 600
+   :alt: Chang Roberts Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+   :figclass: labeled-figure
+
+   Chang Roberts Algorithm
+
+Franklin's Algorithm Number of Messages based on Number of Nodes
+--------------------------------------------------------
+
+.. figure:: figures/franklins_graph.png
+   :width: 600
+   :alt: Franklin's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+   :figclass: labeled-figure
+
+   Franklin's Algorithm
+
+
+.. list-table:: Chang Roberts
+   :widths: 25 25
    :header-rows: 1
 
-   * - Heading row 1, column 1
-     - Heading row 1, column 2
-     - Heading row 1, column 3
-   * - Row 1, column 1
-     -
-     - Row 1, column 3
-   * - Row 2, column 1
-     - Row 2, column 2
-     - Row 2, column 3
+   * - Num nodes
+     - Num messages
+   * - 3
+     - 8
+   * - 4
+     - 10
+   * - 5
+     - 16
+   * - 6
+     - 20
+   * - 7
+     - 23
+   * - 8
+     - 28
+   * - 9
+     - 33
+   * - 10
+     - 36
+   * - 11
+     - 40
+   * - 12
+     - 42
+   * - 13
+     - 42
+   * - 14
+     - 46
+   * - 15
+     - 56
+   * - 16
+     - 60
+   * - 17
+     - 64
+   * - 18
+     - 68
+   * - 19
+     - 69
+   * - 20
+     - 74
+
+.. list-table:: Franklins
+   :widths: 25 25
+   :header-rows: 1
+
+   * - Num nodes
+     - Num messages
+   * - 3
+     - 10
+   * - 4
+     - 16
+   * - 5
+     - 17
+   * - 6
+     - 24
+   * - 7
+     - 29
+   * - 8
+     - 34
+   * - 9
+     - 35
+   * - 10
+     - 43
+   * - 11
+     - 44
+   * - 12
+     - 54
+   * - 13
+     - 59
+   * - 14
+     - 48
+   * - 15
+     - 68
+   * - 16
+     - 65
+   * - 17
+     - 79
+   * - 18
+     - 84
+   * - 19
+     - 78
+   * - 20
+     - 82
 
 
 Discussion
