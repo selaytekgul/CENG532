@@ -10,7 +10,7 @@ In this section, the implementation details and methodologies employed for both 
 
 **Chang and Roberts Algorithm:**
 
-- Approach: Designed for rings where processes have unique identifiers. Messages with process IDs are circulated, and a process remains active if its own ID is larger than the IDs it receives. The process with the largest ID eventually becomes the leader.
+- Approach: Designed for rings where processes have unique identifiers. Messages with process IDs are circulated, and a process remains active if its own ID is larger than the IDs it receives. The process with the largest ID eventually becomes the leader (see figures 1-4).
 *Advantages:*
 
 - Efficiency Improvement: Notably enhances message complexity compared to basic flooding algorithms, contributing to more streamlined communication in ring networks.
@@ -20,9 +20,38 @@ In this section, the implementation details and methodologies employed for both 
 - Message Complexity: Despite being an improvement over basic flooding algorithms, it still exhibits a worst-case message complexity of O(n^2), which can become prohibitive for larger networks.
 - Dependency on Unique Identifiers: The algorithm heavily relies on the existence of unique identifiers for each process, limiting its applicability in scenarios where such identifiers are not readily available.
 
+  .. figure:: figures/algo1cr.png
+    :width: 300
+    :alt: Chang-Roberts's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Chang-Roberts Algorithm Ring Topology
+
+  .. figure:: figures/algo2cr.png
+    :width: 300
+    :alt: Chang-Roberts's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Chang-Roberts Algorithm Initialization
+
+  .. figure:: figures/algo3cr.png
+    :width: 300
+    :alt: Chang-Roberts's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Chang-Roberts Algorithm Messages Sent in a Threaded Environment
+
+  .. figure:: figures/algo4cr.png
+    :width: 300
+    :alt: Chang-Roberts's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Chang-Roberts Algorithm Leader Election
+
+
 **Franklin's Algorithm:**
 
-- Approach: Designed for bidirectional rings. It uses the concept of "waves" of messages, where a process can start a wave if its ID is larger than its neighbors. Waves travel in both directions, and collisions resolve in favor of the larger ID. Eventually, the largest ID prevails.
+- Approach: Designed for bidirectional rings. It uses the concept of "waves" of messages, where a process can start a wave if its ID is larger than its neighbors. Waves travel in both directions, and collisions resolve in favor of the larger ID. Eventually, the largest ID prevails (see figures 5-8).
 *Advantages:*
 
 - Optimized Message Complexity: Offers a significant improvement in terms of message complexity with a worst-case scenario of O(n log n), particularly beneficial for larger ring networks.
@@ -31,6 +60,35 @@ In this section, the implementation details and methodologies employed for both 
 
 - Complex Implementation: Implementation of Franklin's algorithm can be considerably more complex compared to simpler algorithms like Chang and Roberts, requiring a deeper understanding of bidirectional message propagation and collision resolution.
 - Communication Channel Requirements: Relies on bidirectional communication channels between neighboring processes, which may pose challenges in certain network architectures where such channels are not readily available or feasible.
+
+
+  .. figure:: figures/algo1f.png
+    :width: 300
+    :alt: Franklin's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Franklin's Algorithm Ring Topology
+
+  .. figure:: figures/algo2f.png
+    :width: 300
+    :alt: Franklin's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Franklin's Algorithm Initialization
+
+  .. figure:: figures/algo3f.png
+    :width: 300
+    :alt: Franklin's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Franklin's Algorithm Messages Sent in a Threaded Environment
+
+  .. figure:: figures/algo4f.png
+    :width: 300
+    :alt: Franklin's Contributor/Leader Election Algorithm Number of Messages based on Number of Nodes
+    :figclass: labeled-figure
+
+    Franklin's Algorithm Leader Election
 
 
 Results
@@ -48,11 +106,11 @@ Results
 
 **Chang and Roberts Algorithm:**
 
-The simulation results demonstrate that the Chang and Roberts Algorithm effectively elects a leader within directed ring networks. Despite its relatively higher message complexity compared to Franklin’s Algorithm (see Table 1), it showcases robust performance, particularly in scenarios where unique identifiers are readily available (see Figure 1).
+The simulation results demonstrate that the Chang and Roberts Algorithm effectively elects a leader within directed ring networks. Despite its relatively higher message complexity compared to Franklin’s Algorithm (see Table 1), it showcases robust performance, particularly in scenarios where unique identifiers are readily available (see Figure 9).
 
 **Franklin’s Algorithm:**
 
-Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks (see Table 2), making it a suitable choice for scenarios where minimizing message overhead is critical (see Figure 2).
+Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks (see Table 2), making it a suitable choice for scenarios where minimizing message overhead is critical (see Figure 10).
 
 
 Results
@@ -60,11 +118,11 @@ Results
 
 **Chang and Roberts Algorithm:**
 
-The simulation results demonstrate that the Chang and Roberts Algorithm effectively elects a leader within directed ring networks. Despite its relatively higher message complexity compared to Franklin’s Algorithm (see Table 1), it showcases robust performance, particularly in scenarios where unique identifiers are readily available (see Figure 1).
+The simulation results demonstrate that the Chang and Roberts Algorithm effectively elects a leader within directed ring networks. Despite its relatively higher message complexity compared to Franklin’s Algorithm (see Table 1), it showcases robust performance, particularly in scenarios where unique identifiers are readily available (see Figure 9).
 
 **Franklin’s Algorithm:**
 
-Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks (see Table 2), making it a suitable choice for scenarios where minimizing message overhead is critical (see Figure 2).
+Similarly, Franklin’s Algorithm exhibits commendable performance, especially in terms of message complexity. The simulation results indicate its ability to efficiently elect a leader within undirected ring networks (see Table 2), making it a suitable choice for scenarios where minimizing message overhead is critical (see Figure 10).
 
 Chang Roberts Algorithm Number of Messages based on Number of Nodes
 --------------------------------------------------------
