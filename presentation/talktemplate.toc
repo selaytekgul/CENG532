@@ -15,4 +15,4 @@
 \beamer@subsectionintoc {7}{1}{Chang Roberts Algorithm}{28}{0}{7}
 \beamer@subsectionintoc {7}{2}{franklin's Algorithm}{29}{0}{7}
 \beamer@subsectionintoc {7}{3}{Ring Election Algorithms Visualization}{30}{0}{7}
-\beamer@sectionintoc {8}{Conclusions}{31}{0}{8}
+\beamer@sectionintoc {8}{Conclusions}{39}{0}{8}
